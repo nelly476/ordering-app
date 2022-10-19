@@ -6,13 +6,12 @@ body {
   align-items: center;
   background-image: url("bg-image.png");
   background-repeat: no-repeat;
-  background-size: 530px 150px;
+  background-size: 530px 130px;
   background-position: center top;
 }
 header {
-  padding: 2rem;
+  padding: 1.4rem;
 }
-
 header h1,
 header h2 {
   margin: 0;
@@ -27,31 +26,132 @@ header h2 {
   font-size: 24px;
 }
 
-.item {
+.item,
+.order-item,
+.total-price-section {
   display: flex;
   align-items: center;
   font-size: 23px;
   justify-content: space-between;
-  gap: 130px;
+  width: 25rem;
 }
 
 .item-details {
   display: flex;
   align-items: center;
-  margin: 0;
+  column-gap: 30px;
 }
 
 .item-description p:not(:first-child) {
   color: grey;
 }
 
-.emoji {
-  font-size: 70px;
-  margin-right: 1rem;
+.item-description p {
+  margin: 13px;
 }
 
-.material-symbols-outlined {
+.item-description > p {
+  padding: 0;
+}
+
+.emoji {
+  font-size: 70px;
+  width: 70px;
+}
+
+.material-symbols-outlined,
+.remove-option {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 100;
   color: grey;
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.remove-option,
+.selected-item-name {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  width: 508px;
+  height: 60px;
+  background: #16db99;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #51edb9e5;
+  cursor: pointer;
+}
+
+.close-modal-btn {
+  height: fit-content;
+  width: fit-content;
+  padding: 4px 6px;
+}
+
+.close-btn-section {
+  text-align: end;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  justify-self: center;
+  height: fit-content;
+  padding: 1.5rem;
+  width: 350px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 6px 2px #666;
+  background-color: white;
+  color: whitesmoke;
+  color: black;
+  font-family: Arial, sans-serif;
+  display: none;
+}
+
+.modal h2 {
+  margin: 0rem;
+  margin-bottom: 1rem;
+}
+
+.submit-btn {
+  width: 330px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10px;
+}
+
+input {
+  height: 50px;
+  width: 300px;
+}
+
+.form-name {
+  text-align: center;
+}
+
+.thank-you-text {
+  color: #065f46;
+  background-color: #ecfdf5;
+  font-family: "Smythe", sans-serif;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
 }

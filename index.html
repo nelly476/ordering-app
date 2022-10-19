@@ -21,5 +21,47 @@
       <h2>The best burgers and pizzas in town.</h2>
     </header>
     <div id="content"></div>
+    <h2>Your order</h2>
+    <div id="order-section"></div>
+    <div class="total-price-section">
+      <p>Total price:</p>
+      <p id="total-price"></p>
+    </div>
+    <div class="modal" id="modal">
+      <div class="form-name" >
+      <h2>Enter card details</h2>
+    </div>
+      <div class="form-info">
+        <form id="card-details-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            aria-label="Name"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            aria-label="Email address"
+            required
+          />
+          <input
+            type="number"
+            name="number"
+            placeholder="Enter CVV"
+            aria-label="Email CVV"
+            required
+          />
+      </div>
+      <div class="form-submit" id="form-submit">
+        <button type="submit" class="submit-btn">Pay</button>
+      </div>
+    </form>
+    </div>
+</div>
+    <button data-complete="complete">Complete order</button>
   </body>
 </html>
+
