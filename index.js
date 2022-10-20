@@ -6,6 +6,15 @@ const cardDetailsForm = document.getElementById("card-details-form");
 const modal = document.getElementById("modal");
 let totalPrice = 0;
 let orderedItems = [];
+const discountModal = document.getElementById("discount-modal");
+
+setTimeout(function () {
+  discountModal.style.display = "inline";
+}, 1500);
+
+function closeDiscount() {
+  discountModal.style.display = "none";
+}
 
 document.addEventListener("click", function (e) {
   if (e.target.dataset.add) {
@@ -16,6 +25,8 @@ document.addEventListener("click", function (e) {
     completeOrder();
   } else if (e.target.dataset.close) {
     closeModal();
+  } else if (e.target.dataset.discount) {
+    closeDiscount();
   }
 });
 

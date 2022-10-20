@@ -155,3 +155,46 @@ input {
   font-size: 30px;
   font-weight: bold;
 }
+
+.discount-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  justify-self: center;
+  height: 230px;
+  padding: 1.5rem;
+  width: 350px;
+  border-radius: 5px;
+  background-color: #065f46;
+  color: white;
+  display: none;
+}
+
+.discount-close-btn-section {
+  text-align: end;
+}
+
+.close-discount-btn {
+  height: fit-content;
+  width: fit-content;
+  background-color: #065f46;
+}
+
+.discount-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 33px;
+}
+
+.discount-content p,
+.discount-content h2 {
+  margin: 0.8rem;
+}
+
+.discount-hightlight {
+  color: red;
+}
