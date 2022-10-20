@@ -150,7 +150,7 @@ input {
 
 .thank-you-text {
   color: #065f46;
-  background-color: #ecfdf5;
+
   font-family: "Smythe", sans-serif;
   text-align: center;
   font-size: 30px;
@@ -165,6 +165,7 @@ input {
   bottom: 0;
   margin: auto;
   justify-self: center;
+  align-self: center;
   height: 230px;
   padding: 1.5rem;
   width: 350px;

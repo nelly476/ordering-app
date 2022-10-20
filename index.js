@@ -48,6 +48,21 @@ function addOrder(itemId) {
   renderOrder(newOrderItem.id);
 }
 
+function removeOrderItem(itemId) {
+  const targetItem = orderedItems.filter(function (item) {
+    return item.id == itemId;
+  })[0];
+
+  totalPrice -= targetItem.price;
+
+  const index = orderedItems.indexOf(targetItem);
+  if (index > -1) {
+    orderedItems.splice(index, 1);
+  }
+  updateTotalPrice();
+  updateOrder();
+}
+
 let orderedBeers = [];
 let orderedHamburgers = [];
 
@@ -80,19 +95,12 @@ function renderOrder(newItemId) {
   }
 
   document.getElementById("order-section").innerHTML += orderHtml;
-  document.getElementById("total-price").textContent = `${totalPrice}$`;
+
+  updateTotalPrice();
 }
 
-function removeOrderItem(itemId) {
-  const targetItem = orderedItems.filter(function (item) {
-    return item.id == itemId;
-  })[0];
-
-  const index = orderedItems.indexOf(targetItem);
-  if (index > -1) {
-    orderedItems.splice(index, 1);
-  }
-  updateOrder();
+function updateTotalPrice() {
+  document.getElementById("total-price").textContent = `${totalPrice}$`;
 }
 
 function updateOrder() {
@@ -157,6 +165,9 @@ function rateUs() {
   modal.innerHTML = rateUsText;
   document.getElementById("star").addEventListener("click", function () {
     let thankYouText = `
+    <div class="close-btn-section">
+    <button data-close="close" class="close-modal-btn">X</button>
+    </div>
     <p class="thank-you-text">
     Thanks for the review! 
     Your order is on its way!
