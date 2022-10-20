@@ -27,6 +27,8 @@ document.addEventListener("click", function (e) {
     closeModal();
   } else if (e.target.dataset.discount) {
     closeDiscount();
+  } else if (e.target.dataset.rate) {
+    rateUs();
   }
 });
 
@@ -46,10 +48,21 @@ function addOrder(itemId) {
   renderOrder(newOrderItem.id);
 }
 
+let orderedBeers = [];
+let orderedHamburgers = [];
+
 function renderOrder(newItemId) {
   const targetItem = orderedItems.filter(function (item) {
     return item.id == newItemId;
   })[0];
+
+  if (targetItem.name === "Beer") {
+    orderedBeers.push(targetItem);
+  } else if (targetItem.name === "Hamburger") {
+    orderedHamburgers.push(targetItem);
+  }
+
+  totalPrice += targetItem.price;
 
   let orderHtml = `
   <div class="order-item">
@@ -61,8 +74,12 @@ function renderOrder(newItemId) {
   </div>
   `;
 
+  if (orderedBeers.length == 2 && orderedHamburgers.length == 2) {
+    totalPrice -= 8;
+    document.getElementById("discount-applied-text").style.display = "inline";
+  }
+
   document.getElementById("order-section").innerHTML += orderHtml;
-  totalPrice += targetItem.price;
   document.getElementById("total-price").textContent = `${totalPrice}$`;
 }
 
@@ -111,6 +128,9 @@ function completeOrder() {
       Thanks, ${name}! 
       Your order is on its way!
       </p>
+      <div class="rate-us-btn-section">
+      <button class="rate-us-btn" data-rate="rate">Rate us!</button>
+      </div>
       `;
       modal.style.background = "#ECFDF5";
       modal.innerHTML = thankYouText;
@@ -118,6 +138,32 @@ function completeOrder() {
   } else {
     alert("You haven't selected any items :(");
   }
+}
+
+function rateUs() {
+  let rateUsText = `
+  <div class="rate-us-section">
+<h2>Let us know how we're doing!</h2>
+<div class="stars-section" id="star">
+<a href="#" class="fas fa-star s1"></a>
+<a href="#" class="fas fa-star s2"></a>
+<a href="#" class="fas fa-star s3"></a>
+<a href="#" class="fas fa-star s4"></a>
+<a href="#" class="fas fa-star s5"></a>
+</div>
+</div>
+`;
+  modal.style.background = "";
+  modal.innerHTML = rateUsText;
+  document.getElementById("star").addEventListener("click", function () {
+    let thankYouText = `
+    <p class="thank-you-text">
+    Thanks for the review! 
+    Your order is on its way!
+    </p>
+    `;
+    modal.innerHTML = thankYouText;
+  });
 }
 
 function closeModal() {
