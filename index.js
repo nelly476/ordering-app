@@ -7,6 +7,9 @@ const modal = document.getElementById("modal");
 let totalPrice = 0;
 let orderedItems = [];
 const discountModal = document.getElementById("discount-modal");
+let orderedBeers = [];
+let orderedHamburgers = [];
+let orderedPizzas = [];
 
 setTimeout(function () {
   discountModal.style.display = "inline";
@@ -37,15 +40,54 @@ function addOrder(itemId) {
     return dish.id == itemId;
   })[0];
 
-  let newOrderItem = {
-    name: targetItem.name,
-    price: targetItem.price,
-    id: uuidv4(),
-  };
+  targetItem.number++;
 
-  orderedItems.push(newOrderItem);
+  orderedItems.push(targetItem);
 
-  renderOrder(newOrderItem.id);
+  renderOrder(targetItem.id);
+}
+
+function renderOrder(newItemId) {
+  const targetItem = orderedItems.filter(function (item) {
+    return item.id == newItemId;
+  })[0];
+
+  let orderHtml = `
+  <div class="order-item">
+  <div>
+  <p class="selected-item-name">${targetItem.name} X ${targetItem.number} </p>
+  <p class="remove-option" data-remove=${targetItem.id}>Remove</p>
+  </div>
+  <p>${targetItem.price}$</p>
+  </div>
+  `;
+
+  const newDiv = document.createElement("div");
+
+  if (targetItem.number == 1) {
+    newDiv.innerHTML = orderHtml;
+    newDiv.setAttribute("id", `item-${targetItem.id}`);
+    document.getElementById("order-section").appendChild(newDiv);
+  } else {
+    updateOrderedItems(targetItem);
+  }
+
+  updateTotalPrice();
+}
+
+function updateOrderedItems(item) {
+  const targetDiv = document.getElementById(`item-${item.id}`);
+
+  let orderHtml = `
+  <div class="order-item">
+  <div>
+  <p class="selected-item-name">${item.name} X ${item.number} </p>
+  <p class="remove-option" data-remove=${item.id}>Remove</p>
+  </div>
+  <p>${item.price}$</p>
+  </div>
+  `;
+  targetDiv.innerHTML = orderHtml;
 }
 
 function removeOrderItem(itemId) {
@@ -61,42 +103,6 @@ function removeOrderItem(itemId) {
   }
   updateTotalPrice();
   updateOrder();
-}
-
-let orderedBeers = [];
-let orderedHamburgers = [];
-
-function renderOrder(newItemId) {
-  const targetItem = orderedItems.filter(function (item) {
-    return item.id == newItemId;
-  })[0];
-
-  if (targetItem.name === "Beer") {
-    orderedBeers.push(targetItem);
-  } else if (targetItem.name === "Hamburger") {
-    orderedHamburgers.push(targetItem);
-  }
-
-  totalPrice += targetItem.price;
-
-  let orderHtml = `
-  <div class="order-item">
-  <div>
-  <p class="selected-item-name">${targetItem.name} </p>
-  <p class="remove-option" data-remove=${targetItem.id}>Remove</p>
-  </div>
-  <p>${targetItem.price}$</p>
-  </div>
-  `;
-
-  if (orderedBeers.length == 2 && orderedHamburgers.length == 2) {
-    totalPrice -= 8;
-    document.getElementById("discount-applied-text").style.display = "inline";
-  }
-
-  document.getElementById("order-section").innerHTML += orderHtml;
-
-  updateTotalPrice();
 }
 
 function updateTotalPrice() {
