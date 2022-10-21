@@ -117,8 +117,7 @@ function removeOrderItem(itemId) {
 }
 
 function updateTotalPrice() {
-  const updatedTotal = sumOfOrdered.reduce((a, b) => a + b, 0);
-  totalPrice = updatedTotal;
+  totalPrice = sumOfOrdered.reduce((a, b) => a + b, 0);
 
   document.getElementById("total-price").textContent = `${totalPrice}$`;
 }
