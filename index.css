@@ -217,6 +217,10 @@ input {
   cursor: pointer;
 }
 
+.material-symbols-outlined {
+  font-size: 40px;
+}
+
 .material-symbols-outlined:hover {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
   color: #16db99;
