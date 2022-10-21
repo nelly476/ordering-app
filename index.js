@@ -134,12 +134,10 @@ function completeOrder() {
     if (orderedBeers.length >= 2 && orderedHamburgers.length >= 2) {
       totalPrice -= 8;
     }
-    const addIcons = document.getElementsByClassName("add-icon");
-    addIcons[0].style.display = "none";
-    addIcons[1].style.display = "none";
-    addIcons[2].style.display = "none";
 
-    document.getElementById("final-total").textContent += `${totalPrice}$`;
+    document.getElementById(
+      "final-total"
+    ).textContent = `Total: ${totalPrice}$`;
     modal.style.display = "inline";
     cardDetailsForm.addEventListener("submit", function (e) {
       e.preventDefault();
