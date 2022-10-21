@@ -139,7 +139,7 @@ function completeOrder() {
     addIcons[1].style.display = "none";
     addIcons[2].style.display = "none";
 
-    document.getElementById("final-total").textContent += `${totalPrice}`;
+    document.getElementById("final-total").textContent += `${totalPrice}$`;
     modal.style.display = "inline";
     cardDetailsForm.addEventListener("submit", function (e) {
       e.preventDefault();
