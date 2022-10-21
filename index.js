@@ -1,5 +1,4 @@
 import { menuArray as foodData } from "/data.js";
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 const menuArray = JSON.parse(JSON.stringify(foodData));
 const cardDetailsForm = document.getElementById("card-details-form");
@@ -9,6 +8,7 @@ let orderedItems = [];
 const discountModal = document.getElementById("discount-modal");
 let orderedBeers = [];
 let orderedHamburgers = [];
+let sumOfOrdered = [];
 
 setTimeout(function () {
   discountModal.style.display = "inline";
@@ -31,8 +31,6 @@ document.addEventListener("click", function (e) {
     closeDiscount();
   } else if (e.target.dataset.rate) {
     rateUs();
-  } else if (e.target.dataset.apply) {
-    applyDiscount();
   }
 });
 
@@ -44,6 +42,8 @@ function addOrder(itemId) {
   targetItem.number++;
 
   orderedItems.push(targetItem);
+  sumOfOrdered.push(targetItem.price);
+  updateTotalPrice();
   renderOrder(targetItem.id);
 }
 
@@ -71,27 +71,12 @@ function renderOrder(newItemId) {
     updateOrderedItems(targetItem);
   }
 
-  totalPrice += targetItem.price;
-  updateTotalPrice();
-
   if (targetItem.id == 1) {
     orderedHamburgers.push(targetItem);
   } else if (targetItem.id == 2) {
     orderedBeers.push(targetItem);
   }
-  if (orderedBeers.length >= 2 && orderedHamburgers.length >= 2) {
-    document.getElementById("discount-applied-text").style.display = "inline";
-  }
-}
-
-function applyDiscount() {
-  totalPrice -= 8;
-  updateTotalPrice();
-  document.getElementById("discount-applied-text").innerHTML = `
-  <p class="discount-applied-text" id="discount-applied-text">
-  <span class="discount-hightlight">Discount applied!
-  </span></p>
-  `;
+  checkForDiscount();
 }
 
 function updateOrderedItems(item) {
@@ -118,22 +103,42 @@ function removeOrderItem(itemId) {
     return item.id == itemId;
   })[0];
 
-  totalPrice -= targetItem.price;
-
   targetItem.number--;
+
+  if (targetItem.id == 1) {
+    orderedHamburgers.pop();
+  } else if (targetItem.id == 2) {
+    orderedBeers.pop();
+  }
+  checkForDiscount();
+  sumOfOrdered.pop(targetItem.price);
   updateOrderedItems(targetItem);
   updateTotalPrice();
 }
 
 function updateTotalPrice() {
+  const updatedTotal = sumOfOrdered.reduce((a, b) => a + b, 0);
+  totalPrice = updatedTotal;
+
   document.getElementById("total-price").textContent = `${totalPrice}$`;
+}
+
+function checkForDiscount() {
+  if (orderedBeers.length >= 2 && orderedHamburgers.length >= 2) {
+    totalPrice -= 8;
+    document.getElementById("discount-applied-text").style.display = "inline";
+  } else {
+    updateTotalPrice();
+    document.getElementById("discount-applied-text").style.display = "none";
+  }
 }
 
 function completeOrder() {
   if (orderedItems.length > 0) {
-    if (orderedBeers.length >= 2 && orderedHamburgers.length >= 2) {
-      totalPrice -= 8;
-    }
+    const addIcons = document.getElementsByClassName("add-icon");
+    addIcons[0].style.display = "none";
+    addIcons[1].style.display = "none";
+    addIcons[2].style.display = "none";
 
     document.getElementById(
       "final-total"
