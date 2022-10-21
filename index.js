@@ -62,9 +62,8 @@ function renderOrder(newItemId) {
   </div>
   `;
 
-  const newDiv = document.createElement("div");
-
   if (targetItem.number == 1) {
+    const newDiv = document.createElement("div");
     newDiv.innerHTML = orderHtml;
     newDiv.setAttribute("id", `item-${targetItem.id}`);
     document.getElementById("order-section").appendChild(newDiv);
@@ -72,13 +71,15 @@ function renderOrder(newItemId) {
     updateOrderedItems(targetItem);
   }
 
+  totalPrice += targetItem.price;
   updateTotalPrice();
 }
 
 function updateOrderedItems(item) {
   const targetDiv = document.getElementById(`item-${item.id}`);
 
-  let orderHtml = `
+  if (item.number > 0) {
+    let orderHtml = `
   <div class="order-item">
   <div>
   <p class="selected-item-name">${item.name} X ${item.number} </p>
@@ -87,7 +88,10 @@ function updateOrderedItems(item) {
   <p>${item.price}$</p>
   </div>
   `;
-  targetDiv.innerHTML = orderHtml;
+    targetDiv.innerHTML = orderHtml;
+  } else {
+    targetDiv.remove();
+  }
 }
 
 function removeOrderItem(itemId) {
@@ -97,32 +101,13 @@ function removeOrderItem(itemId) {
 
   totalPrice -= targetItem.price;
 
-  const index = orderedItems.indexOf(targetItem);
-  if (index > -1) {
-    orderedItems.splice(index, 1);
-  }
+  targetItem.number--;
+  updateOrderedItems(targetItem);
   updateTotalPrice();
-  updateOrder();
 }
 
 function updateTotalPrice() {
   document.getElementById("total-price").textContent = `${totalPrice}$`;
-}
-
-function updateOrder() {
-  let orderHtml = "";
-  orderedItems.forEach(function (item) {
-    orderHtml += `
-    <div class="order-item">
-    <div>
-    <p class="selected-item-name">${item.name} </p>
-    <p class="remove-option" data-remove=${item.id}>Remove</p>
-    </div>
-    <p>${item.price}$</p>
-    </div>
-    `;
-  });
-  document.getElementById("order-section").innerHTML = orderHtml;
 }
 
 function completeOrder() {
