@@ -9,7 +9,6 @@ let orderedItems = [];
 const discountModal = document.getElementById("discount-modal");
 let orderedBeers = [];
 let orderedHamburgers = [];
-let orderedPizzas = [];
 
 setTimeout(function () {
   discountModal.style.display = "inline";
@@ -32,6 +31,8 @@ document.addEventListener("click", function (e) {
     closeDiscount();
   } else if (e.target.dataset.rate) {
     rateUs();
+  } else if (e.target.dataset.apply) {
+    applyDiscount();
   }
 });
 
@@ -43,7 +44,6 @@ function addOrder(itemId) {
   targetItem.number++;
 
   orderedItems.push(targetItem);
-
   renderOrder(targetItem.id);
 }
 
@@ -73,6 +73,25 @@ function renderOrder(newItemId) {
 
   totalPrice += targetItem.price;
   updateTotalPrice();
+
+  if (targetItem.id == 1) {
+    orderedHamburgers.push(targetItem);
+  } else if (targetItem.id == 2) {
+    orderedBeers.push(targetItem);
+  }
+  if (orderedBeers.length >= 2 && orderedHamburgers.length >= 2) {
+    document.getElementById("discount-applied-text").style.display = "inline";
+  }
+}
+
+function applyDiscount() {
+  totalPrice -= 8;
+  updateTotalPrice();
+  document.getElementById("discount-applied-text").innerHTML = `
+  <p class="discount-applied-text" id="discount-applied-text">
+  <span class="discount-hightlight">Discount applied!
+  </span></p>
+  `;
 }
 
 function updateOrderedItems(item) {
@@ -112,6 +131,15 @@ function updateTotalPrice() {
 
 function completeOrder() {
   if (orderedItems.length > 0) {
+    if (orderedBeers.length >= 2 && orderedHamburgers.length >= 2) {
+      totalPrice -= 8;
+    }
+    const addIcons = document.getElementsByClassName("add-icon");
+    addIcons[0].style.display = "none";
+    addIcons[1].style.display = "none";
+    addIcons[2].style.display = "none";
+
+    document.getElementById("final-total").textContent += `${totalPrice}`;
     modal.style.display = "inline";
     cardDetailsForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -186,7 +214,7 @@ function getFeedHtml() {
         <p>${item.price}$</p>
     </div>
     </div>
-    <span class="material-symbols-outlined" data-add="${item.id}">
+    <span id="add-icon" class="material-symbols-outlined add-icon" data-add="${item.id}">
 add_circle
 </span>
 </div>    
