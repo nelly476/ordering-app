@@ -185,7 +185,7 @@ function rateUs() {
 </div>
 </div>
 `;
-  modal.style.background = "";
+
   modal.innerHTML = rateUsText;
   document.getElementById("star").addEventListener("click", function () {
     let thankYouText = `
