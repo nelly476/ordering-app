@@ -38,6 +38,8 @@ header h2 {
 .total-price-section {
   margin: 1rem;
   align-items: flex-start;
+  border-top: 1.5px solid black;
+  padding-top: 0.6rem;
 }
 
 #total-price {
