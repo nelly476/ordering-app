@@ -111,7 +111,10 @@ function removeOrderItem(itemId) {
     orderedBeers.pop();
   }
   checkForDiscount();
-  sumOfOrdered.pop(targetItem.price);
+  const itemIndex = sumOfOrdered.indexOf(targetItem.price);
+  if (itemIndex > -1) {
+    sumOfOrdered.splice(itemIndex, 1);
+  }
   updateOrderedItems(targetItem);
   updateTotalPrice();
 }
@@ -133,7 +136,7 @@ function checkForDiscount() {
 }
 
 function completeOrder() {
-  if (orderedItems.length > 0) {
+  if (orderedItems.length > 0 && totalPrice > 0) {
     const addIcons = document.getElementsByClassName("add-icon");
     addIcons[0].style.display = "none";
     addIcons[1].style.display = "none";
