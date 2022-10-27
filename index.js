@@ -10,7 +10,7 @@ let orderedBeers = [];
 let orderedHamburgers = [];
 let sumOfOrdered = [];
 
-setTimeout(function () {
+setTimeout(() => {
   discountModal.style.display = "inline";
 }, 1500);
 
@@ -35,9 +35,7 @@ document.addEventListener("click", function (e) {
 });
 
 function addOrder(itemId) {
-  const targetItem = menuArray.filter(function (dish) {
-    return dish.id == itemId;
-  })[0];
+  const targetItem = menuArray.filter((dish) => dish.id == itemId)[0];
 
   targetItem.number++;
 
@@ -48,9 +46,7 @@ function addOrder(itemId) {
 }
 
 function renderOrder(newItemId) {
-  const targetItem = orderedItems.filter(function (item) {
-    return item.id == newItemId;
-  })[0];
+  const targetItem = orderedItems.filter((item) => item.id == newItemId)[0];
 
   let orderHtml = `
   <div class="order-item">

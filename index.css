@@ -1,3 +1,7 @@
+html {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Smythe", sans-serif;
@@ -129,8 +133,15 @@ button:hover {
   margin-bottom: 1rem;
 }
 
+.form-submit {
+  display: flex;
+  justify-content: center;
+}
+
 .submit-btn {
   width: 330px;
+  width: 15em;
+  margin-top: 1em;
 }
 
 form {
@@ -172,7 +183,7 @@ input {
   padding: 1.5rem;
   width: 350px;
   border-radius: 5px;
-  background-color: #16db99;
+  background-color: orangered;
   color: white;
   display: none;
 }
@@ -184,7 +195,12 @@ input {
 .close-discount-btn {
   height: fit-content;
   width: fit-content;
-  background-color: #16db99;
+  background-color: orangered;
+}
+
+.close-discount-btn:hover {
+  background-color: rgba(175, 88, 56, 0.711);
+  cursor: pointer;
 }
 
 .discount-content {
@@ -199,10 +215,6 @@ input {
   margin: 0.8rem;
 }
 
-.discount-hightlight {
-  color: red;
-}
-
 .discount-applied p {
   font-weight: bold;
   margin: 0;
@@ -210,6 +222,7 @@ input {
 
 .discount-applied-text {
   display: none;
+  color: red;
 }
 
 .material-symbols-outlined,

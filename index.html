@@ -1,5 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />  
+    <meta name="author" content="Nelly" />
+    <meta name="description" content="Jimmy's burger and pizza ordering app" />
     <!-- Add icon svg -->
     <link
       rel="stylesheet"
@@ -8,44 +13,53 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Star icon svg -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" type="image/svg" href="./reshot-icon-restaurant.svg" />
+    <link rel="stylesheet" href="./index.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Smythe"
       rel="stylesheet"
     />
-    <script src="index.js" type="module" defer></script>
+    <script src="./index.js" type="module" defer></script>
   </head>
   <body>
     <header>
       <h1>Jimmy’s Diner</h1>
       <h2>The best burgers and pizzas in town.</h2>
     </header>
+
     <div id="content"></div>
+
     <h2>Your order</h2>
     <div id="order-section"></div>
+
     <div class="total-price-section">
       <div class="discount-applied">
       <p>Total price:</p>
-      <p class="discount-applied-text" id="discount-applied-text"><span class="discount-hightlight">Discount will be applied at the checkout ♥</span></p>
+      <p class="discount-applied-text" id="discount-applied-text">Discount will be applied at the checkout ♥</p>
     </div>
       <p id="total-price"></p>
     </div>
+
    <div class="discount-modal" id="discount-modal">
     <div class="discount-close-btn-section">
       <button class="close-discount-btn" data-discount = "closeDiscount">X</button>
     </div>
+
     <div class="discount-content">
     <h2>Only today!</h2>
-    <p>2 hamburgers + 2 beers = <span class="discount-hightlight">40$!</span></p>
+    <p>2 hamburgers + 2 beers = 40$!</p>
   </div>
    </div>
+
     <div class="modal" id="modal">
       <div class="final-total-section">
       <h2 id="final-total"></h2>
 </div>      
+
 <div class="form-name" >
       <h2>Enter card details</h2>
     </div>
+
       <div class="form-info">
         <form id="card-details-form">
           <input
@@ -69,13 +83,15 @@
             aria-label="Email CVV"
             required
           />
-      </div>
+      </div>  <!-- form info -->
+
       <div class="form-submit" id="form-submit">
         <button type="submit" class="submit-btn">Pay</button>
-      </div>
+      </div> <!-- form submit -->
+
     </form>
-    </div>
-</div>
+    </div>  <!-- modal -->
+  </div>
     <button data-complete="complete">Complete order</button>
   </body>
 </html>
